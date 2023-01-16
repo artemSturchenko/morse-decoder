@@ -35,10 +35,29 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
+    '':' '
 };
 
 function decode(expr) {
-    // write your solution here
+    let resultWord = ''
+    const arr = expr.match(/.{1,10}/g)
+    const resArr = []
+    for (let q = 0; q < arr.length; q++) {
+        const newArr = arr[q].match(/.{1,2}/g)
+        const charArray = []
+        for (let z = 0; z < newArr.length; z++) {
+            if (newArr[z] == '10') {
+                charArray.push('.')
+            } else if (newArr[z] == '11') {
+                charArray.push('-')
+            }
+        }
+        resArr.push(charArray.join(''))
+    }
+    for(let q = 0;q<resArr.length;q++){
+        resultWord += MORSE_TABLE[resArr[q]]
+    }
+    return resultWord
 }
 
 module.exports = {
